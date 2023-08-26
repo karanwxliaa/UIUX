@@ -6,9 +6,7 @@ import sys
 #     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # install('flask_mail')
-
 from flask_mail import Mail, Message
-
 app = Flask(__name__)
 
 # Configure Flask-Mail settings

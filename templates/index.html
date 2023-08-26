@@ -65,7 +65,13 @@ body {
     align-items: center;
     margin-bottom: 10px;
 }
-
+select {
+    width: 100%;
+    padding: 8px;
+    font-family: 'Helvetica', Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 .filter-checkbox {
     margin-right: 10px;
 }
@@ -89,7 +95,10 @@ body {
 .calendar-dropdown select {
     padding: 5px;
 }
-
+#filters    label{
+    text-align: left;
+    width:400px;
+}
 
 .right-side-box {
     flex: 1;
@@ -102,7 +111,20 @@ body {
             border-right: 1px solid #ccc;
             overflow-y: auto; /* Add scroll if needed */
         }
-    
+        .checkbox-container:nth-child(5n) {
+    padding-bottom: 30px;
+}
+    #leftSide{
+            text-align: left;
+            align-items: center;
+            align-content: center;
+            width:"100%";
+            justify-content: center;
+    }
+    .checkbox-container{
+        width:50%;
+        line-height: 1.5em;
+    }
     </style>
 </head>
 
@@ -113,9 +135,11 @@ body {
     <div class="container">
         
         <div class="right-side">
-            <div class="filters">
+            <div class="filters" style="align-content: center; text-align: center;justify-content: center; display: flex; width: 100%; flex-direction: column;">
                 <div class="filter-title">Insights As a Service UI</div>
-                <div class="filter-item">
+                <div id="filters" style="display:flex; justify-content: center;" >
+                    <div style="padding:10px">
+                        <div class="filter-item">
                     <label for="state-filter">Filter by State:  </label>
                     <select id="state-filter">
                         <option value="all">All States</option>
@@ -170,24 +194,26 @@ body {
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select>
-                </div>
-                <div class="filter-item">
-                    <label for="container-filter">Filter by specific Module:  </label>
-                    <select id="container-filter">
-                        <option value="option1">none</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
-                </div>
-                <div class="filter-item">
+                        </div>
+                        <div class="filter-item">
+                            <label for="container-filter">Filter by specific Module:  </label>
+                            <select id="container-filter">
+                                <option value="option1">none</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="padding:10px">
+                        <div class="filter-item">
                     <label for="clustering-filter">Filter by Clustering Parameter:  </label>
                     <select id="clustering-filter">
                         <option value="option1">none</option>
                         <option value="option2">Option 2</option>
                         <option value="option3">Option 3</option>
                     </select>
-                </div>
-                <div class="filter-item">
+                        </div>
+                        <div class="filter-item">
                     <label>Filter by Month and Year:  </label>
                     <div class="calendar-dropdown">
                         <select>
@@ -216,6 +242,9 @@ body {
                             </script>
                         </select>
                     </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <button id="submit-button" class="submit-button">Apply Filter</button>
             </div>
