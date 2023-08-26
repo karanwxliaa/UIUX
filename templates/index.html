@@ -140,7 +140,7 @@ select {
                 <div id="filters" style="display:flex; justify-content: center;" >
                     <div style="padding:10px">
                         <div class="filter-item">
-                    <label for="state-filter">Filter by State:  </label>
+                    <label for="state-filter">State:  </label>
                     <select id="state-filter">
                         <option value="all">All States</option>
                         <option value="AL">Alabama</option>
@@ -196,7 +196,7 @@ select {
                     </select>
                         </div>
                         <div class="filter-item">
-                            <label for="container-filter">Filter by specific Module:  </label>
+                            <label for="container-filter">Module:  </label>
                             <select id="container-filter">
                                 <option value="option1">none</option>
                                 <option value="option2">Option 2</option>
@@ -206,7 +206,7 @@ select {
                     </div>
                     <div style="padding:10px">
                         <div class="filter-item">
-                    <label for="clustering-filter">Filter by Clustering Parameter:  </label>
+                    <label for="clustering-filter">Clustering Parameter:  </label>
                     <select id="clustering-filter">
                         <option value="option1">none</option>
                         <option value="option2">Option 2</option>
@@ -214,7 +214,7 @@ select {
                     </select>
                         </div>
                         <div class="filter-item">
-                    <label>Filter by Month and Year:  </label>
+                    <label>Month and Year:  </label>
                     <div class="calendar-dropdown">
                         <select>
                             <option value="0">none</option>
@@ -298,65 +298,70 @@ select {
                 });
                 </script>  
                 
-                <div class="left-side-box">
-                    <div class="left-side" id="leftSide">
-                        <!-- Entries will be populated here -->
-                    </div>
-                </div>
-    
-            
-                
-    
-                
-    
-    
-                <script>
-                    // Fetch entries from the Flask API and populate checkboxes
-                    fetch('/get_entries')
-                        .then(response => response.json())
-                        .then(entries => {
-                            const leftSide = document.getElementById('leftSide');
-                            entries.forEach(entry => {
-                                const checkboxContainer = document.createElement('div');
-                                checkboxContainer.className = 'checkbox-container';
-                                const checkbox = document.createElement('input');
-                                checkbox.type = 'checkbox';
-                                checkbox.className = 'checkbox';
-                                const label = document.createElement('label');
-                                label.textContent = entry; // Use the entry string directly
-                                checkboxContainer.appendChild(checkbox);
-                                checkboxContainer.appendChild(label);
-                                leftSide.appendChild(checkboxContainer);
-                            });
-                
-                            // Add a submit button to the left side
-                            const submitButton = document.createElement('button');
-                            submitButton.textContent = 'Submit Selected Queries';
-                            submitButton.className = 'submit-button';
-                            leftSide.appendChild(submitButton);
-    
-    
-    
-    
-                            // Add event listener to the submit button
-                            submitButton.addEventListener('click', () => {
-                                const selectedQueries = Array.from(document.querySelectorAll('.checkbox:checked'))
-                                    .map(checkbox => checkbox.nextSibling.textContent); // Extract labels
                             
-                                // Open the new page
-                                const newWindow = window.open('/selected_queries', '_blank');
-                                newWindow.addEventListener('DOMContentLoaded', () => {
-                                    const ul = newWindow.document.querySelector('ul');
-                                    selectedQueries.forEach(query => {
-                                        const li = newWindow.document.createElement('li');
-                                        li.textContent = query;
-                                        ul.appendChild(li);
-                                    });
+            <div class="left-side-box">
+                <div class="left-side" id="leftSide">
+                    <!-- Entries will be populated here -->
+                </div>
+            </div>
+
+            <style>
+                /* Define the style for highlighting */
+                .highlighted {
+                    background-color: yellow; /* You can customize the highlighting style */
+                }
+            </style>
+
+            <script>
+                // Fetch entries from the Flask API and populate checkboxes
+                fetch('/get_entries')
+                    .then(response => response.json())
+                    .then(entries => {
+                        const leftSide = document.getElementById('leftSide');
+                        entries.forEach(entry => {
+                            const checkboxContainer = document.createElement('div');
+                            checkboxContainer.className = 'checkbox-container';
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.className = 'checkbox';
+                            const label = document.createElement('label');
+                            label.textContent = entry; // Use the entry string directly
+                            checkboxContainer.appendChild(checkbox);
+                            checkboxContainer.appendChild(label);
+                            leftSide.appendChild(checkboxContainer);
+                            
+                            // Add event listener to the checkbox
+                            checkbox.addEventListener('click', () => {
+                                checkboxContainer.classList.toggle('highlighted');
+                            });
+                        });
+
+                        // Add a submit button to the left side
+                        const submitButton = document.createElement('button');
+                        submitButton.textContent = 'Submit Selected Queries';
+                        submitButton.className = 'submit-button';
+                        leftSide.appendChild(submitButton);
+
+                        // Add event listener to the submit button
+                        submitButton.addEventListener('click', () => {
+                            const selectedQueries = Array.from(document.querySelectorAll('.checkbox:checked'))
+                                .map(checkbox => checkbox.nextSibling.textContent); // Extract labels
+
+                            // Open the new page
+                            const newWindow = window.open('/selected_queries', '_blank');
+                            newWindow.addEventListener('DOMContentLoaded', () => {
+                                const ul = newWindow.document.querySelector('ul');
+                                selectedQueries.forEach(query => {
+                                    const li = newWindow.document.createElement('li');
+                                    li.textContent = query;
+                                    ul.appendChild(li);
                                 });
                             });
-                        })
-                        .catch(error => console.error('Error fetching entries:', error));
-                </script>
+                        });
+                    })
+                    .catch(error => console.error('Error fetching entries:', error));
+            </script>
+
                 
 
         </div>
@@ -364,5 +369,6 @@ select {
 
 </body>
 </html>
+
 
 

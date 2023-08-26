@@ -13,8 +13,8 @@ app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = False  # Adjust this as needed
-app.config['MAIL_USERNAME'] = 'prodjkarma@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Temp@1234'
+app.config['MAIL_USERNAME'] = ''
+app.config['MAIL_PASSWORD'] = ''
 
 
 mail = Mail(app)
@@ -83,7 +83,7 @@ def send_email():
         response_message = 'Email sent successfully!'
     except Exception as e:
         print(e)
-        response_message = 'Email sent successfully!'
+        response_message = 'Error sending email'
 
     return jsonify({"message": response_message})
 
@@ -109,7 +109,8 @@ def submit_filters():
     return jsonify({"message": "Filter details received successfully!"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
+
 
 
 
