@@ -1,119 +1,124 @@
 <!DOCTYPE html>
 <html>
+
+
+
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <style>
-        
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+            
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
 
-.container {
-    display: flex;
-    flex-direction: column;
-}
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
 
-.right-side, .left-side-box {
-    width: 100%;
-}
-
-
-.data {
-    display: flex; 
-    order: 2; 
-}
-
-.left-side {
-    flex: 1;
-    width: 100%; 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    justify-content: flex-start;
-}
-
-.checkbox {
-    margin-right: 10px;
-}
+    .right-side, .left-side-box {
+        width: 100%;
+    }
 
 
+    .data {
+        display: flex; 
+        order: 2; 
+    }
 
-.filters {
-    width: 100%; 
-    order: 1; 
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 20px;
-    background-color: #f8f8f8;
-    margin-bottom: 20px;
-}
+    .left-side {
+        flex: 1;
+        width: 100%; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.filter-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+    }
 
-.filter-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-select {
-    width: 100%;
-    padding: 8px;
-    font-family: 'Helvetica', Arial, sans-serif;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.filter-checkbox {
-    margin-right: 10px;
-}
+    .checkbox {
+        margin-right: 10px;
+    }
 
-.submit-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    color: #ffffff;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.calendar-dropdown {
-    position: relative;
-    display: inline-block;
-}
 
-.calendar-dropdown select {
-    padding: 5px;
-}
-#filters    label{
-    text-align: left;
-    width:400px;
-}
 
-.right-side-box {
-    flex: 1;
-    padding: 10px;
-}
+    .filters {
+        width: 100%; 
+        order: 1; 
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 20px;
+        background-color: #f8f8f8;
+        margin-bottom: 20px;
+    }
 
-.left-side-box {
-            flex: 1;
-            padding: 10px;
-            border-right: 1px solid #ccc;
-            overflow-y: auto; /* Add scroll if needed */
-        }
-        .checkbox-container:nth-child(5n) {
-    padding-bottom: 30px;
-}
+    .filter-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .filter-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    select {
+        width: 100%;
+        padding: 8px;
+        font-family: 'Helvetica', Arial, sans-serif;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .filter-checkbox {
+        margin-right: 10px;
+    }
+
+    .submit-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        color: #ffffff;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .calendar-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .calendar-dropdown select {
+        padding: 5px;
+    }
+    #filters    label{
+        text-align: left;
+        width:400px;
+    }
+
+    .right-side-box {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .left-side-box {
+                flex: 1;
+                padding: 10px;
+                border-right: 1px solid #ccc;
+                overflow-y: auto; /* Add scroll if needed */
+            }
+            .checkbox-container:nth-child(5n) {
+        padding-bottom: 30px;
+    }
     #leftSide{
             text-align: left;
             align-items: center;
@@ -125,8 +130,17 @@ select {
         width:50%;
         line-height: 1.5em;
     }
+
+    .centered-item {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
     </style>
 </head>
+
+
 
 
 
@@ -138,10 +152,13 @@ select {
             <div class="filters" style="align-content: center; text-align: center;justify-content: center; display: flex; width: 100%; flex-direction: column;">
                 <div class="filter-title">Insights As a Service UI</div>
                 <div id="filters" style="display:flex; justify-content: center;" >
+      
+                    
+                    
                     <div style="padding:10px">
                         <div class="filter-item">
-                    <label for="state-filter">State:  </label>
-                    <select id="state-filter">
+                    <label for="state-filter">States:</label>
+                    <select id="state-filter" >
                         <option value="all">All States</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -194,56 +211,62 @@ select {
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select>
-                        </div>
-                        <div class="filter-item">
-                            <label for="container-filter">Module:  </label>
-                            <select id="container-filter">
-                                <option value="option1">none</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </select>
+                    </div>
+                        
+                </div>
+                <div style="padding:10px">
+                    <div class="filter-item">
+                <label for="clustering-filter"> Column Names:  </label>
+                <select id="clustering-filter">
+                    <option value="Churn Rate">Churn Rate</option>
+                    <option value="Earned Premium">Earned Premium</option>
+                    <option value="Cancellations">Cancellations</option>
+                    <option value="Incurred Losses">Incurred Losses</option>
+                    <option value="Loss Ratio">Loss Ratio</option>
+                    <option value="Day 366 Persist.">Day 366 Persist.</option>
+                    <option value="Growth Rate">Growth Rate</option>
+                    <option value="Inforce">Inforce</option>
+                    <option value="Average Premium">Average Premium</option>
+                    <option value="Policies Issued">Policies Issued</option>
+                    <option value="Premium">Premium Selected</option>
+                    <option value="Renewals">Renewals</option>
+                    <option value="Unit Count">Unit Count</option>
+                    <option value="Remorse (30 days)">Remorse (30 days)</option>
+                    <option value="Remorse (60 days)">Remorse (60 days)</option>
+                    <option value="Net Adds">Net Adds</option>
+                    <option value="Remorse (90 days)">Remorse (90 days)</option>
+                    <option value="Reported Frequency">Reported Frequency</option>
+                    <option value="Expirations">Expirations</option>
+                    <option value="Reinstatements">Reinstatements</option>
+                    <option value="YTD Policies Issued">YTD Policies Issued</option>
+                    <option value="Persisting Customers">Persisting Customers</option>
+                </select>
+                </div>
+
+
+
+                <div class="filter-item">
+                    <div class="centered-item">
+                        <label>Month and Year:</label>
+                        <div class="calendar-dropdown">
+                            <input type="text" id="calendar-input" placeholder="Select Date">
                         </div>
                     </div>
-                    <div style="padding:10px">
-                        <div class="filter-item">
-                    <label for="clustering-filter">Clustering Parameter:  </label>
-                    <select id="clustering-filter">
-                        <option value="option1">none</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                    </select>
-                        </div>
-                        <div class="filter-item">
-                    <label>Month and Year:  </label>
-                    <div class="calendar-dropdown">
-                        <select>
-                            <option value="0">none</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                        <select>
-                            <option value="0">none</option>
-                            <!-- Generate years from 2000 to current year -->
-                            <script>
-                                const currentYear = new Date().getFullYear();
-                                for (let year = 1950; year <= currentYear; year++) {
-                                    document.write(`<option value="${year}">${year}</option>`);
-                                }
-                            </script>
-                        </select>
-                    </div>
-                        </div>
-                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                <script>
+                    flatpickr("#calendar-input", {
+                        dateFormat: "F Y", // Display format (e.g., "Month Year")
+                        minDate: "1950-01-01", // Minimum selectable date
+                        maxDate: new Date(), // Maximum selectable date (current date)
+                    });
+                </script>
+
+
+            </div>
+                </div>
+            </div>
                     
                 </div>
                 <button id="submit-button" class="submit-button">Apply Filter</button>
@@ -253,31 +276,31 @@ select {
                 document.addEventListener("DOMContentLoaded", function () {
                     // Get references to the filter elements
                     const stateFilter = document.getElementById("state-filter");
-                    const containerFilter = document.getElementById("container-filter");
+                    //const containerFilter = document.getElementById("container-filter");
                     const clusteringFilter = document.getElementById("clustering-filter");
-                    const monthFilter = document.querySelectorAll(".calendar-dropdown select")[0];
-                    const yearFilter = document.querySelectorAll(".calendar-dropdown select")[1];
+                    const calendarInput = document.getElementById("calendar-input"); // Updated
                     const submitButton = document.getElementById("submit-button");
-                
+            
                     // Add event listener to the submit button
                     submitButton.addEventListener("click", function () {
                         // Collect selected values from filters
                         const selectedState = stateFilter.value;
-                        const selectedContainer = containerFilter.value;
+                        //const selectedContainer = containerFilter.value;
                         const selectedClustering = clusteringFilter.value;
-                        const selectedMonth = monthFilter.value;
-                        const selectedYear = yearFilter.value;
-                
-                        // object to store filter details
+                        const selectedDate = calendarInput.value; // Updated
+            
+                        // Extract month and year from selected date
+                        const [selectedMonth, selectedYear] = selectedDate.split(' ');
+            
+                        // Object to store filter details
                         const filterDetails = {
                             state: selectedState,
-                            container: selectedContainer,
                             clustering: selectedClustering,
                             month: selectedMonth,
                             year: selectedYear
                         };
-                
-                        // sending the filter details to the Flask API by fetch
+            
+                        // Sending the filter details to the Flask API using fetch
                         fetch("/submit_filters", {
                             method: "POST",
                             headers: {
@@ -288,17 +311,19 @@ select {
                         .then(response => response.json())
                         .then(data => {
                             console.log("Response from Flask API:", data);
-                            // response
+                            // Handle response
                         })
                         .catch(error => {
                             console.error("Error sending filter details:", error);
-                            // err
+                            // Handle error
                         });
                     });
                 });
-                </script>  
-                
-                            
+            </script>
+            
+
+
+                        
             <div class="left-side-box">
                 <div class="left-side" id="leftSide">
                     <!-- Entries will be populated here -->
@@ -333,6 +358,11 @@ select {
                             // Add event listener to the checkbox
                             checkbox.addEventListener('click', () => {
                                 checkboxContainer.classList.toggle('highlighted');
+                                
+                                // Store selected entries in local storage
+                                const selectedQueries = Array.from(document.querySelectorAll('.checkbox:checked'))
+                                    .map(checkbox => checkbox.nextSibling.textContent);
+                                localStorage.setItem('selectedQueries', JSON.stringify(selectedQueries));
                             });
                         });
 
@@ -344,14 +374,12 @@ select {
 
                         // Add event listener to the submit button
                         submitButton.addEventListener('click', () => {
-                            const selectedQueries = Array.from(document.querySelectorAll('.checkbox:checked'))
-                                .map(checkbox => checkbox.nextSibling.textContent); // Extract labels
-
                             // Open the new page
                             const newWindow = window.open('/selected_queries', '_blank');
                             newWindow.addEventListener('DOMContentLoaded', () => {
                                 const ul = newWindow.document.querySelector('ul');
-                                selectedQueries.forEach(query => {
+                                const storedQueries = JSON.parse(localStorage.getItem('selectedQueries'));
+                                storedQueries.forEach(query => {
                                     const li = newWindow.document.createElement('li');
                                     li.textContent = query;
                                     ul.appendChild(li);

@@ -18,3 +18,6 @@ ENV NAME World
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
+
+#docker build -t flask-email-app .
+#docker run -p 4000:80 flask-email-app

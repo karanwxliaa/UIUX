@@ -64,9 +64,14 @@
         <button id="send-email-button">Send Email</button>
     </div>
 
-
+    <!-- New Download Section -->
+    <div>
+        
+        <a id="download-button" class="button download-button" href="#">Download Queries</a>
+    </div>
 
     <script>
+        const downloadButton = document.getElementById('download-button');
         const selectedQueriesList = document.getElementById('selected-queries-list');
         const sendEmailButton = document.getElementById('send-email-button');
         const emailInput = document.getElementById('email');
@@ -74,14 +79,17 @@
         // Retrieve selected queries from localStorage
         const selectedQueries = JSON.parse(localStorage.getItem('selectedQueries'));
     
-        if (selectedQueries) {
-            selectedQueries.forEach(query => {
-                const li = document.createElement('li');
-                li.textContent = query;
-                selectedQueriesList.appendChild(li);
-            });
-        }
+        // if (selectedQueries) {
+        //     selectedQueries.forEach(query => {
+        //         const li = document.createElement('li');
+        //         li.textContent = query;
+        //         selectedQueriesList.appendChild(li);
+        //     });
+        // }
     
+
+
+
         // Add event listener to the send email button
         sendEmailButton.addEventListener('click', () => {
             const email = emailInput.value;
@@ -113,7 +121,37 @@
                 alert('Error!');
             });
         });
+
+        // Add event listener to the download button
+        downloadButton.addEventListener('click', () => {
+            if (selectedQueries) {
+                const content = selectedQueries.join('\n');
+                const blob = new Blob([content], { type: 'text/plain' });
+                
+                // Create a URL for the blob
+                const url = URL.createObjectURL(blob);
+                
+                // Create an anchor element to trigger the download
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'selected_queries.txt';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                
+                // Trigger the click event to initiate download
+                a.click();
+                
+                // Clean up the URL and the anchor element
+                URL.revokeObjectURL(url);
+                a.remove();
+            }
+        });
+
+   
     </script>
-    
+
+
+
 </body>
 </html>
+

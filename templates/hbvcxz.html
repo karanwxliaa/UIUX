@@ -1,0 +1,63 @@
+
+<body>
+    <div class="container">
+        <div class="right-side">
+            <div class="filters">
+                <div class="filter-title">Insights As a Service UI</div>
+                <div id="filters">
+                    <div class="filter-item">
+                        <label for="state-dropdown">States:</label>
+                        <select id="state-dropdown" multiple class="state-select">
+                            <!-- Add the options for states here -->
+                        </select>
+                    </div>
+
+                    <div class="filter-item">
+                        <!-- Other filter items -->
+                    </div>
+
+                    <button id="submit-button" class="submit-button">Apply Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stateSelect = document.getElementById("state-dropdown");
+            const allStatesCheckbox = document.getElementById("state-all");
+
+            // Function to update the "All States" checkbox based on selected options
+            function updateAllStatesCheckbox() {
+                const selectedOptions = [...stateSelect.options].filter(option => option.selected);
+                allStatesCheckbox.checked = selectedOptions.length === stateSelect.options.length - 1;
+            }
+
+            // Event listener for individual state options
+            stateSelect.addEventListener("change", function () {
+                updateAllStatesCheckbox();
+            });
+
+            // Event listener for the "All States" checkbox
+            allStatesCheckbox.addEventListener("change", function () {
+                const isChecked = this.checked;
+                [...stateSelect.options].forEach(option => {
+                    option.selected = isChecked;
+                });
+            });
+
+            // Populate the state options
+            const stateOptions = ["AL", "AK", "AZ", /* Add other state codes here */];
+            stateOptions.forEach(state => {
+                const option = document.createElement("option");
+                option.value = state;
+                option.text = state;
+                stateSelect.appendChild(option);
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+
+</html>

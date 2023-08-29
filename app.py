@@ -1,24 +1,12 @@
 from flask import Flask, jsonify, send_file, request, render_template
+from email.message import EmailMessage
+import ssl
+import smtplib
 import subprocess
 import sys
 
-# def install(package):
-#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# install('flask_mail')
-from flask_mail import Mail, Message
 app = Flask(__name__)
-
-# Configure Flask-Mail settings
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = False  # Adjust this as needed
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
-
-
-mail = Mail(app)
-
 
 # Updated dummy entries as a list of strings
 insights = [
@@ -61,31 +49,51 @@ insights = [
 ]
 
 
+from email.message import EmailMessage
+import ssl
+import smtplib
+
+
+
+    
 @app.route('/send_email', methods=['POST'])
 def send_email():
-    email_data = request.json  # Assuming the JSON data contains 'queries' and 'email' key
+
+    email_data = request.json
     
-    subject = 'Selected Queries'
-    sender_email = app.config['MAIL_USERNAME']
-    recipient_email = email_data['email']
-    queries = '\n'.join(email_data['queries'])
+    email_sender = "vishnoiaman777@gmail.com"
+    password = "hapmfamdnecogoew"
+    
+    subject = "GEICO Updates"
+    email_receiver = email_data['email']
+    queries = email_data['queries']
 
-    message = f'''
-    Here are the selected queries:
+    
 
-    {queries}
-    '''
+    #print("data = ",email_data)
+    body = """
 
-    try:
-        msg = Message(subject=subject, sender=sender_email, recipients=[recipient_email])
-        msg.body = message
-        mail.send(msg)
-        response_message = 'Email sent successfully!'
-    except Exception as e:
-        print(e)
-        response_message = 'Error sending email'
+    Please find the updates for the GEICO
 
-    return jsonify({"message": response_message})
+
+    """
+    count=0
+    for i in queries:
+        count+=1
+        body+='\n'+str(count)+". "+i
+
+    em = EmailMessage()
+    em['From'] = email_sender
+    em['To'] = email_receiver
+    em['Subject'] = subject
+    em.set_content(body)
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, password)
+        smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+    return jsonify({"message": "Email sent successfully!"})
 
 
 @app.route('/')
